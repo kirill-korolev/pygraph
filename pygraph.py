@@ -6,7 +6,7 @@ class AdjList:
         assert isinstance(vertices, list), "vertices are not complaint with the list type"
         self._vertices = vertices if vertices else []
         self._edges = dict()
-        self._list = [deque()] * len(vertices) if vertices else []
+        self._list = [deque() for _ in vertices] if vertices else []
 
     def add_vertex(self, v):
         self._vertices.append(v)
@@ -29,6 +29,12 @@ class AdjList:
         edge = self._edges.get(e, None)
         assert edge, "{0} invalid index".format(e)
         return edge
+
+    def vertices(self):
+        return self._vertices
+
+    def edges(self):
+        return self._list
 
     def bfs(self, v, *, pre=None, post=None):
         assert v < len(self._vertices), "{0} invalid index".format(v)
